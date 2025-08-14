@@ -7,7 +7,7 @@ namespace App\Core;
  class DBinit
  {
      private string $host = "pfeffi65.lima-db.de:3306";
-     private string $dbname = "db_399097_23";
+     private string $dbname = "db_399097_24";
      /**
       * @var mixed|PDO|null
       */
@@ -18,7 +18,7 @@ namespace App\Core;
      {
          try {
              $this->connection = new PDO (
-                 "mysql:host={$this->host};dbname={$this->dbname}", "USER399097_fpl", "24th03Pfeffi?"
+                 "mysql:host={$this->host};dbname={$this->dbname}", "USER399097_plan", "24th03Pfeffi?"
              );
          } catch (PDOException $e) {
              echo $e->getMessage();
@@ -36,6 +36,6 @@ namespace App\Core;
          return $this->connection;
      }
      public function closeConnection(){
-         //
+         $this->connection = null;
      }
 }

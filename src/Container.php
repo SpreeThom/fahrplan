@@ -5,6 +5,8 @@ namespace App;
  use App\Core\DBinit;
  use App\Home\HomeController;
  use App\Home\HomeDatabase;
+ use App\Zug\ZugController;
+ use App\Zug\ZugDatabase;
 
  class Container{
     private array $instances =[];
@@ -16,6 +18,12 @@ namespace App;
         },
             "homeDatabase"=> function(){
                 return new HomeDatabase($this->build('pdo'));
+            },
+            "zugController"=> function(){
+                return new ZugController($this->build('zugDatabase'));
+            },
+            "zugDatabase"=> function(){
+            return new ZugDatabase($this->build('pdo'));
             },
             'router' => function(){
                 return new Router($this->build("container"));

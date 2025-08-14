@@ -13,7 +13,6 @@ class HomeController extends AbstractController
 
         {
             $notiz = $this->homeDatabase->getNotiz();
-            var_dump($notiz);
            //$laufwege = $this->homeDatabase->getLaufweg();
             $this ->pageLoad("Home", "home",['notiz' => $notiz]);
         }
