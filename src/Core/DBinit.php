@@ -6,7 +6,8 @@ namespace App\Core;
 
  class DBinit
  {
-     private string $host = "pfeffi65.lima-db.de:3306";
+     //private string $host = "pfeffi65.lima-db.de:3306";
+     private string $host = "localhost";
      private string $dbname = "db_399097_24";
      /**
       * @var mixed|PDO|null

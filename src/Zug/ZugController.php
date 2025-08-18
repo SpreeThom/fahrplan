@@ -14,7 +14,7 @@ class ZugController extends AbstractController
     }
     //
     public function zug():void{
-
-        $this -> pageLoad("Zug","zug",[]);
+       $zug= $this->zugDatabase->getZug();
+        $this -> pageLoad("Zug","zug",['zug' => $zug]);
     }
 }
