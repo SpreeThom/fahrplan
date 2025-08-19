@@ -45,32 +45,29 @@ get_header('start');
     <hr>
     <div class="row ">
         <div class = "col border border-dark border-end border-1 m-0">
-    <form class="row g-3">
+    <form class="row g-3" method="post" >
         <div class="col-md-6">
             <label for="zugNr" class="form-label">Nummer des Zuges (int)</label>
-            <input type="number" class="form-control" id="zugNr" value="0">
+            <input type="text" class="form-control" id="zugNr" name="zugNr">
         </div>
         <div class="col-md-6">
             <label for="zugMg" class="form-label">Gattung mit Zug Nummer(Abk.)</label>
-            <input type="text" class="form-control" id="zugMg">
+            <input type="text" class="form-control" id="zugMg"name="zugMg">
         </div>
-        <div class="col-12">
-            <label for="zugIntern" class="form-label">Notizen über den Zug (z.b. über ...)</label>
-            <textarea type="text" class="form-control" rows="3" id="zugIntern"></textarea>
-        </div>
+        <!-- Textarea -->
         <div class="col-md-6">
             <label for="zugJahr" class="form-label">Jahr</label>
-            <input type="text" class="form-control" id="zugJahr">
+            <input type="text" class="form-control" id="zugJahr" name="zugJahr">
         </div>
         <div class="col-md-6">
             <label for="zugLw" class="form-label">Laufweg</label>
-            <input type="text" class="form-control" id="zugLw">
+            <input type="text" class="form-control" id="zugLw" name="zugLw">
         </div>
         <!-- Abfrage ob zug Update -->
         <div class ="col-md-12 border border-warning border-1 p-md-3">
         <div class="col-md-4">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="zugUpdate">
+                <input class="form-check-input" type="checkbox" id="zugUpdate" name="zugUpdate">
                 <label class="form-check-label" for="zugUpdate">
                     <span class="fw-bold" >Update Zug (id)</span>
                 </label>
@@ -78,7 +75,7 @@ get_header('start');
         </div>
             <div class="col-md-2">
                 <label for="upID" class="form-label">ID</label>
-                <input type="number" class="form-control" id="upID">
+                <input type="text" class="form-control" id="upID" name="upID">
             </div>
         </div>
         <div class="col-12 pb-md-3">
@@ -88,41 +85,49 @@ get_header('start');
         </div>
         <!-- intern Fahrplan eintragen -->
         <div class = "col border border-dark border-start-0 border-1 m-0">
-            <form class="row g-3">
+            <form class="row g-3" method="post" >
             <div class="col-md-6">
                 <label for="internJahr" class="form-label">Intern Jahr (int)</label>
-                <input type="number" class="form-control" id="internJahr" value="0">
+                <input type="text" class="form-control" id="internJahr" name="internJahr">
             </div>
             <div class="col-md-6">
-                <label for="internfpl" class="form-label">Taschenfahrplan</label>
-                <input type="number" class="form-control" id="internfpl" value="0">
+                <label for="internFpl" class="form-label">Taschenfahrplan</label>
+                <input type="text" class="form-control" id="internFpl" name="internFpl">
             </div>
             <div class="col-md-6">
-                <label for = "internlw" class="form-label">Laufweg / über</label>
-                <input type="text" class="form-control" id="internlw"></input>
+                <label for = "internLw" class="form-label">Laufweg / über</label>
+                <input type="text" class="form-control" id="internLw" name="internLw">
             </div>
                 <div class="col-md-6">
                     <label for="zugGattung" class="form-label">Die Zug - Gattung</label>
-                    <input type="text" class="form-control" id="zugGattung" placeholder="Eilzug">
+                    <input type="text" class="form-control" id="zugGattung" name="zugGattung" placeholder="Eilzug">
+                </div>
+                <div class="col-12">
+                    <label for="zugIntern" class="form-label">Notizen über den Zug (z.b. über ...)</label>
+                    <textarea type="text" class="form-control" rows="3" id="zugIntern" name="zugIntern"></textarea>
                 </div>
             <div class = "col-md-6">
-                <label for="interntage" class="form-label">Verkehrstage</label>
-                <input type = "text" class="form-control" id="interntage"></input>
+                <label for="internTage" class="form-label">Verkehrstage</label>
+                <input type = "text" class="form-control" id="internTage" name="internTage" ></input>
             </div>
             <div class = "col-md-6">
-                 <label for="internnicht" class="form-label">Verkehrt nicht am / von-bis</label>
-                <input type = "text" class="form-control" id="internnicht"></input>
+                 <label for="internNicht" class="form-label">Verkehrt nicht am / von-bis</label>
+                <input type = "text" class="form-control" id="internNicht" name="internNicht"></input>
+            </div>
+            <div class = "col-md-6">
+                <label for = "idZug" class="form-label">Zug aus Tabelle</label>
+                <input type = "text" class="form-control" id="idZug" name="idZug"></input>
             </div>
                 <div class = "col-md-6">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="internmitropa">
-                    <label class="form-check-label" for="intermitropa">
-                        Mitropa
+                    <input class="form-check-input" type="checkbox" id="internMitropa" name="internMitropa">
+                    <label class="form-check-label" for="interMitropa">
+                        Mitropa /Speisewagen
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="internbar">
-                    <label class="form-check-label" for="internbar">
+                    <input class="form-check-input" type="checkbox" id="internBar" name="internBar">
+                    <label class="form-check-label" for="internBar">
                         Getränkeabteil
                     </label>
                 </div>
@@ -134,5 +139,8 @@ get_header('start');
         </div>
     </div>
 </div>
-<!-- todo tabelle intern ändern -->
+<?php if(!empty($error)){
+    var_dump($error);
+} ?>
+
 <?php get_footer(); ?>
