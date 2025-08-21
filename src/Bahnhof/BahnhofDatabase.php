@@ -26,19 +26,28 @@ class BahnhofDatabase extends AbstractDatabase
         return BahnhofModel::class;
     }
 
-    public function insertBahnhof($haltestelle):void
+    public function insertBahnhof($haltestelle,$reihe):void
     {
         try{
+            if(!empty($reihe)){
+                $reihe = floatval($reihe);
+                $reihe = sprintf("%.2f",$reihe);
+                var_dump($reihe);
+            }else{
+                $reihe = 0;
+            }
             if(!empty($this->pdo)){
                 $id_echeck = $this->pdo->prepare("SELECT `name` FROM db_399097_24.haltestelle 
                                                             WHERE `name` = :haltestelle; ");
                 $id_echeck->execute(['haltestelle' => $haltestelle]);
                 $check = $id_echeck->fetch(PDO::FETCH_ASSOC);
                     if(isset($check['name'])){
+                        header("location: /bahnhof");
                         exit();
                     }else{
-                        $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.haltestelle (`name`) VALUES (:name);");
-                        $stmt -> execute(['name' => $haltestelle]);
+                        $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.haltestelle (`name`,`reihe`) VALUES (:name,:reihe);");
+                        $stmt -> execute(params: ['name' => $haltestelle,
+                                                  'reihe' => $reihe]);
                     }
             }
         }catch (PDOException $e){

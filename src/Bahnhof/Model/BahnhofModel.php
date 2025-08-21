@@ -8,4 +8,5 @@ class BahnhofModel extends AbstractModel
 {
     public $id;
     public $name;
+    public $reihe;
 }
