@@ -33,7 +33,18 @@ class ZugDatabase extends AbstractDatabase
         }
         return $data;
     }
+    function getIntern():false|array
+    {
+        if (!empty($this -> pdo)){
+            $stmt = $this -> pdo -> prepare("SELECT * FROM db_399097_24.intern");
+            $stmt -> execute();
+            $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            $data= false;
+        }
+        return $data;
 
+    }
     /**
      * @param $nr
      * @param $mg
@@ -41,25 +52,30 @@ class ZugDatabase extends AbstractDatabase
      * @param $lw
      * @return bool
      */
-    function insertZug($nr, $mg, $jahr, $lw):true
+    function insertZug($nr, $mg, $jahr, $lw):bool
     {
+        $b=true;
         try {
-            if (!empty($this->pdo)) {
-                $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.zug (zug_nr,zug_mg,zug_jahr,zug_lw)
+          if($this->equalTableZug($nr,$jahr)){
+              $b=false;
+          }else {
+              if (!empty($this->pdo)) {
+                  $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.zug (zug_nr,zug_mg,zug_jahr,zug_lw)
                                             VALUES (:nr,:mg,:jahr,:lw)");
-                $stmt->execute([
-                    ":nr" => $nr,
-                    ":mg" => $mg,
-                    ":jahr" => $jahr,
-                    ":lw" => $lw
-                ]);
-            }
+                  $stmt->execute([
+                      ":nr" => $nr,
+                      ":mg" => $mg,
+                      ":jahr" => $jahr,
+                      ":lw" => $lw
+                  ]);
+              }
+          }
         } catch (PDOException $e) {
            header("Location /zug");
+
             exit();
         }
-
-            return true;
+            return $b;
     }
 
     /**
@@ -96,4 +112,39 @@ class ZugDatabase extends AbstractDatabase
         }
         return true;
     }
+
+    /**
+     * @param $znr
+     * @param $mg
+     * @param $jahr
+     * @param $lw
+     * @param $upid
+     * @return bool
+     */
+    function setUpdateZug($znr, $mg, $jahr, $lw, $upid):bool
+    {
+        if (!empty($this->pdo)) {
+            $znr = intval($znr);
+            $jahr = intval($jahr);
+            $upid = intval($upid);
+            $stmt = $this->pdo->prepare(/** @lang text */ "UPDATE db_399097_24.zug SET zug_nr ='$znr',zug_mg ='$mg',zug_jahr ='$jahr',zug_lw ='$lw'
+                                            WHERE zug_id = '$upid' ");
+            $stmt->execute();
+        }
+        return true;
+    }
+     protected function equalTableZug($nr,$jahr):bool
+     {
+         $b=false;
+         $id_check = $this->pdo->prepare("SELECT `zug_nr` FROM db_399097_24.zug WHERE `zug_nr` = :nummer; ");
+         $id_check->execute([':nummer' => $nr]);
+         $checkNr = $id_check->fetch(PDO::FETCH_ASSOC);
+         $id_check_J = $this->pdo->prepare("SELECT `zug_jahr` FROM db_399097_24.zug WHERE `zug_jahr` = :jahr; ");
+         $id_check_J->execute([':jahr' => $jahr]);
+         $checkJahr = $id_check_J->fetch(PDO::FETCH_ASSOC);
+         if($checkNr && $checkJahr){
+            $b=true;
+         }
+         return $b;
+     }
 }

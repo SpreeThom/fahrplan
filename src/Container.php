@@ -2,6 +2,8 @@
 
 namespace App;
 
+ use App\Bahnhof\BahnhofController;
+ use App\Bahnhof\BahnhofDatabase;
  use App\Core\DBinit;
  use App\Home\HomeController;
  use App\Home\HomeDatabase;
@@ -24,6 +26,12 @@ namespace App;
             },
             "zugDatabase"=> function(){
             return new ZugDatabase($this->build('pdo'));
+            },
+            "bahnhofController"=> function(){
+            return new BahnhofController($this->build('bahnhofDatabase'));
+            },
+            "bahnhofDatabase"=> function(){
+            return new BahnhofDatabase($this->build('pdo'));
             },
             'router' => function(){
                 return new Router($this->build("container"));

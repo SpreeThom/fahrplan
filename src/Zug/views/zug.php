@@ -4,7 +4,7 @@
  */
 get_header('start');
 /** @var TYPE_NAME $zug */
-
+/** @var TYPE_NAME $intern */
 ?>
 <div class="container">
     <h4 class="text-center text-success">Zug  </h4>
@@ -36,7 +36,29 @@ get_header('start');
         </div>
         </div>
         <div class = "col">
-            //
+            <p>Züge Intern Verkehrstage/Laufwege</p>
+            <div style="max-height:200px; overflow-y:auto;">
+             <table class="table table-bordered table-striped mb-2">
+                <thead>
+                <tr class="text-start">
+                    <th>ID </th>
+                    <th> Jahr</th>
+                    <th>Laufweg</th>
+                    <th>ZugID</th>
+                </tr>
+                <?php
+                foreach ($intern as $key) {
+                    echo "<tr class = 'text-center'>";
+                    echo "<td>" . $key['i_id'] . "</td>";
+                    echo "<td>" . $key['i_fpljahr'] . "</td>";
+                    echo "<td class = 'text-success text-bg-warning' style='font-size: .8em '>" . $key['i_lw'] . "</td>";
+                    echo "<td>" . $key['zugId'] . "</td>";
+                    echo "</tr>";
+                }
+                ?>
+                </thead>
+            </table>
+        </div>
         </div>
     </div>
     <hr>
@@ -52,7 +74,7 @@ get_header('start');
         </div>
         <div class="col-md-6">
             <label for="zugMg" class="form-label">Gattung mit Zug Nummer(Abk.)</label>
-            <input type="text" class="form-control" id="zugMg"name="zugMg">
+            <input type="text" class="form-control" id="zugMg" name="zugMg">
         </div>
         <!-- Textarea -->
         <div class="col-md-6">
@@ -108,25 +130,25 @@ get_header('start');
                 </div>
             <div class = "col-md-6">
                 <label for="internTage" class="form-label">Verkehrstage</label>
-                <input type = "text" class="form-control" id="internTage" name="internTage" ></input>
+                <input type = "text" class="form-control" id="internTage" name="internTage" />
             </div>
             <div class = "col-md-6">
                  <label for="internNicht" class="form-label">Verkehrt nicht am / von-bis</label>
-                <input type = "text" class="form-control" id="internNicht" name="internNicht"></input>
+                <input type = "text" class="form-control" id="internNicht" name="internNicht"/>
             </div>
             <div class = "col-md-6">
                 <label for = "idZug" class="form-label">Zug aus Tabelle</label>
-                <input type = "text" class="form-control" id="idZug" name="idZug"></input>
+                <input type = "text" class="form-control" id="idZug" name="idZug"/>
             </div>
                 <div class = "col-md-6">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="internMitropa" name="internMitropa">
-                    <label class="form-check-label" for="interMitropa">
+                    <input class="form-check-input" type="checkbox" id="internMitropa" name="internMitropa"/>
+                    <label class="form-check-label" for="internMitropa">
                         Mitropa /Speisewagen
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="internBar" name="internBar">
+                    <input class="form-check-input" type="checkbox" id="internBar" name="internBar"/>
                     <label class="form-check-label" for="internBar">
                         Getränkeabteil
                     </label>

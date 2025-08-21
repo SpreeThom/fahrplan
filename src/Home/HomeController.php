@@ -12,8 +12,8 @@ class HomeController extends AbstractController
         public function home(): void
 
         {
-            $notiz = $this->homeDatabase->getNotiz();
+            //$notiz = $this->homeDatabase->getNotiz();
            //$laufwege = $this->homeDatabase->getLaufweg();
-            $this ->pageLoad("Home", "home",['notiz' => $notiz]);
+            $this ->pageLoad("Home", "home",['notiz' => null]);
         }
 }
