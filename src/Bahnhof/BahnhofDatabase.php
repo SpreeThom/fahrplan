@@ -68,4 +68,24 @@ class BahnhofDatabase extends AbstractDatabase
             }
         return $data;
     }
+
+    /**
+     * @param $term
+     * @return bool
+     */
+    public function searchBahnhof($term): null|array
+    {
+        $table = $this->getTable();
+        $model = $this->getModel();
+        $dataBhf = null;
+        if(!empty($this->pdo)){
+            $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE name LIKE :term; ");
+            $stmt->execute(['term' => $term.'%']);
+           //$dataBhf = $stmt->setFetchMode(PDO::FETCH_CLASS);
+            while($row = $stmt->fetchALL(PDO::FETCH_ASSOC)){
+                $dataBhf = $row;
+            }
+        }
+        return $dataBhf;
+    }
 }
