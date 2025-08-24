@@ -71,7 +71,7 @@ class BahnhofDatabase extends AbstractDatabase
 
     /**
      * @param $term
-     * @return bool
+     * @return null|array
      */
     public function searchBahnhof($term): null|array
     {
