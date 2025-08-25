@@ -8,6 +8,7 @@
     get_header('start');
 /** @var TYPE_NAME $bahnhof */
 /** @var TYPE_NAME $suche */
+/** @var TYPE_NAME $fahrplan */
 ?>
 <div class = "container">
     <h4 class ="text-center">Eintrag für die Bahnhöfe </h4>
@@ -127,9 +128,40 @@
             </form>
 
         </div>
-        <div class="col-4 border border-dark border-1">
+        <div class="col-4 border border-dark border-1 bg-warning">
+            <div style="max-height: 200px; overflow-y:auto;" >
+                <table  class="table table-bordered table-striped  mb-2">
+                    <thead>
+                        <tr class="text-center">
+                            <th>ID</th>
+                            <th>Haltestelle</th>
+                            <th>Ankunft</th>
+                            <th>Abfahrt</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-start ">
+                    <?php
+                    if(empty($fahrplan)){
+                        echo " <div class='text-center'>Keine Daten vorhanden!</div>";
+                    }else {
 
+                        foreach ($fahrplan as $key) {
+                            echo "<tr style='font-size:.75em;'>";
+                            echo "<td>" . $key['id'] . "</td>";
+                            echo "<td >" .$key['bahnhof'] ."</td>";
+                            echo "<td>" .$key['Ankunft']."</td>";
+                            echo "<td>" .$key['Abfahrt'] ."</td>";
+                            echo "</tr>";
+                        }
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+<hr>
+    <?php get_footer() ?>
 </div>
+
 

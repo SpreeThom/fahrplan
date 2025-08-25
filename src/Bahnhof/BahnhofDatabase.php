@@ -32,7 +32,6 @@ class BahnhofDatabase extends AbstractDatabase
             if(!empty($reihe)){
                 $reihe = floatval($reihe);
                 $reihe = sprintf("%.2f",$reihe);
-                var_dump($reihe);
             }else{
                 $reihe = 0;
             }
@@ -87,5 +86,64 @@ class BahnhofDatabase extends AbstractDatabase
             }
         }
         return $dataBhf;
+    }
+
+    /**
+     * @param int $halte_id
+     * @return bool
+     */
+    protected function equalTableFahrplan(int $halte_id): bool
+    {
+        $b = false;
+        $id_echeck = $this->pdo->prepare("SELECT `halte_id` FROM db_399097_24.fahrplan WHERE `halte_id` = :haltestelle_id ");
+        $id_echeck->execute(['haltestelle_id' => $halte_id]);
+        $check = $id_echeck->fetch(PDO::FETCH_ASSOC);
+        if(isset($check['halte_id'])){
+
+            $b = true;
+        }
+        return $b;
+    }
+    function insertFahrplan(int $zugid,int $halteid,int $reihe,$ankunft,$abfahrt):bool
+    {
+        $b= true;
+        try {
+            if($this->equalTableFahrplan($halteid)){
+                $b = false;
+            }else{
+                if(!empty($this->pdo)){
+                    $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.fahrplan (z_id, halte_id,reihe, ankunft, abfahrt) 
+                                             VALUES (:zugid,:halteid,:reihe,:ankunft,:abfahrt)");
+                    $stmt ->execute([
+                            ":zugid" => $zugid,
+                            ":halteid" => $halteid,
+                            ":reihe" => $reihe,
+                            ":ankunft" => $ankunft,
+                            ":abfahrt" => $abfahrt
+                    ]);
+                }
+            }
+
+        }catch (PDOException $e){
+            header("Location /bahnhof");
+            exit();
+        }
+        return $b;
+    }
+    public function abfrageFahrplan(int $zugid):array|null{
+        $data=null;
+        try {
+            if (!empty($this->pdo)){
+                $stmt = $this->pdo->prepare("SELECT z.zug_mg AS zug, h.name AS bahnhof,f.id, f.Ankunft,f.Abfahrt
+                                            FROM db_399097_24.fahrplan f JOIN db_399097_24.zug z on z_id = z.zug_id 
+                                            join db_399097_24.haltestelle h on f.halte_id = h.id 
+                                            where z.zug_id = $zugid order by f.reihe ");
+                $stmt ->execute();
+                $data = $stmt->fetchAll();
+            }
+        }catch (PDOException $ex){
+
+        }
+        return $data;
     }
 }

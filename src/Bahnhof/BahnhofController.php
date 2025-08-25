@@ -11,13 +11,27 @@ class BahnhofController extends AbstractController
      */
     protected $bahnhofDatabase = null;
     protected $suche ='';
+    protected int $zugid = 0;
 
     public function __construct(BahnhofDatabase $bahnhofDatabase){
         $this->bahnhofDatabase = $bahnhofDatabase;
     }
     public function bahnhof():void{
         //
-        if(isset($_POST['bhfName'])){
+        $fahrplan = null;
+        if((!empty($_POST['zugID'])) and (!empty($_POST['halteID'])))
+        {
+            $z_id = intval( $this->sanitizeData($_POST['zugID']));
+            $h_id = intval( $this->sanitizeData($_POST['halteID']));
+            $folge = intval( $this->sanitizeData($_POST['rfolge']));
+            $_ank = $this->sanitizeData($_POST['ank']);
+            $_abf = $this->sanitizeData($_POST['abf']);
+            $this -> bahnhofDatabase ->insertFahrplan($z_id,$h_id,$folge,$_ank,$_abf);
+
+        }elseif(!empty($_POST['zugID'])){
+            $this->zugid = $_POST['zugID'];
+        }
+        if(!empty($_POST['bhfName'])){
             $bhfName =$this ->sanitizeData($_POST['bhfName']);
             $reihe =$this ->sanitizeData($_POST['bhfReihe']);
             $this -> bahnhofDatabase ->insertBahnhof($bhfName,$reihe);
@@ -29,7 +43,8 @@ class BahnhofController extends AbstractController
             $this->suche  = null;
         }
         $bahnhof = $this ->bahnhofDatabase ->getHaltestelle();
-        $this -> pageLoad('Bahnhof','bahnhof',['bahnhof' => $bahnhof,'suche'=> $this->suche]);
+        $fahrplan= $this->bahnhofDatabase->abfrageFahrplan($this->zugid);
+        $this -> pageLoad('Bahnhof','bahnhof',['bahnhof' => $bahnhof,'suche'=> $this->suche,'fahrplan'=>$fahrplan]);
     }
     private function sanitizeData($data):string{
         if(empty($data)){
