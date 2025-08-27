@@ -13,7 +13,7 @@
     <link rel="stylesheet" href = "<?php echo baseUrl()?>./assets/css/bootstrap.css" type = "text/css"
 
 </head>
-<body class = "container-fluid">
+<body class = "container">
 <header>
     <div class="container py-1">
         <p class="bg-primary text-center text-white fs-3">Historische Fahrplan-Daten</p>

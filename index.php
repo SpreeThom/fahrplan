@@ -16,4 +16,6 @@ elseif ($request == "/zug") {
 }
 elseif ($request == "/bahnhof"){
     $router -> add("bahnhofController","bahnhof");
+}elseif($request == "/strecken"){
+    $router -> add("trackController","track");
 }

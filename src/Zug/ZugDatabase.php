@@ -10,12 +10,18 @@ use PDOException;
 class ZugDatabase extends AbstractDatabase
 {
 
-    function getTable()
+    /**
+     * @return string
+     */
+    function getTable(): string
     {
         return "zug";
     }
 
-    function getModel()
+    /**
+     * @return string
+     */
+    function getModel(): string
     {
         return ZugModel::class;
     }
