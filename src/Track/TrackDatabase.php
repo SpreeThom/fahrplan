@@ -49,7 +49,7 @@ class TrackDatabase extends AbstractDatabase
         $data = null;
         try {
             if(!empty($this->pdo)){
-                $stmt = $this->pdo->prepare("SELECT h.name,h.id from db_399097_24.haltestelle h 
+                $stmt = $this->pdo->prepare("SELECT h.name,h.id,st.folge  from db_399097_24.haltestelle h 
                               join db_399097_24.strecken st on h.id = st.h_id 
                                join db_399097_24.strecke s on st.s_id = s.str_id where s.str_id = $s ");
                 $stmt->execute();
@@ -61,5 +61,29 @@ class TrackDatabase extends AbstractDatabase
         }
 
         return $data;
+    }
+
+    /**
+     * @param $str_id
+     * @param $halte_id
+     * @param $folge
+     * @return bool
+     */
+    function insertAll($str_id, $halte_id, $folge):bool{
+        $b=true;
+        try {
+            if(!empty($this->pdo)){
+                $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.strecken(s_id, h_id, folge) 
+                                VALUES (:s_id, :h_id, :folge)");
+                $stmt->execute([
+                    ":s_id" => $str_id,
+                    ":h_id" => $halte_id,
+                    ":folge" => $folge
+                ]);
+            }
+        }catch(PDOException $e){
+            $b=false;
+        }
+        return $b;
     }
 }
