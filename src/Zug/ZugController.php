@@ -27,10 +27,10 @@ class ZugController extends AbstractController
 
             if((!empty($_POST['zugUpdate'])) and (!empty($_POST['upID'])) and (!empty($_POST['zugNr']))) {
                 $this ->updateZug();
-            }elseif((!empty($_POST['zugNr'])) and (!empty($_POST['zugJahr']))) {
+            }elseif((!empty($_POST['zugNr'])) and (!empty($_POST['zugGt']))) {
                 $this ->zugEintragen();
             }
-            if((!empty($_POST['internJahr'])) AND (!empty($_POST['internFpl'])) ) {
+            if((!empty($_POST['zugGattung'])) AND (!empty($_POST['internFpl'])) ) {
                 $checkM = isset($_POST['internMitropa']) ? 1 : 0;
                 $checkB = isset($_POST['internBar']) ? 1 : 0;
                 $this->internEintragen($checkM, $checkB);
@@ -53,10 +53,13 @@ class ZugController extends AbstractController
     {
                 $zNummer = $this->sanitizeData($_POST['zugNr']);
                 $zMitgattung = $this->sanitizeData($_POST['zugMg']);
-                $zJahr = $this->sanitizeData($_POST['zugJahr']);
+                $zJahr = "1986";
                 $zLaufweg = $this->sanitizeData($_POST['zugLw']);
-                $err=$this->zugDatabase->insertZug($zNummer,$zMitgattung, $zJahr,$zLaufweg);
+                $zGattung = $this->sanitizeData($_POST['zugGt']);
+                $err=$this->zugDatabase->insertZug($zNummer,$zMitgattung, $zJahr,$zLaufweg,$zGattung);
+            var_dump($err);
                 if(!$err){
+
                     $this->setError("Datenbank-Fehler!");
                     header("Location: /fahrplan/");
                 }
@@ -68,7 +71,6 @@ class ZugController extends AbstractController
      * @return void
      */
     private function internEintragen($checkM, $checkB):void{
-        $jahr = $this->sanitizeData($_POST['internJahr']);
         $fpl = $this->sanitizeData($_POST['internFpl']);
         $lw = $this->sanitizeData($_POST['internLw']);
         $gat = $this->sanitizeData($_POST['zugGattung']);
@@ -78,7 +80,7 @@ class ZugController extends AbstractController
         $mitropa = $checkM;
         $bar = $checkB;
         $_id = $this->sanitizeData($_POST['idZug']);
-        $this->zugDatabase->insertIntern($jahr,$fpl,$gat,$lw,$tage,$nicht,$text,$mitropa,$bar,$_id);
+        $this->zugDatabase->insertIntern($fpl,$gat,$lw,$tage,$nicht,$text,$mitropa,$bar,$_id);
      }
      function updateZug(): void
      {

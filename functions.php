@@ -31,6 +31,7 @@ function get_footer($name = null):void{
     call_user_func($obj,$template);
 }
 function baseUrl():string{
+    $newString = null;
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
     $new = $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     $position = strrpos($new, "/");

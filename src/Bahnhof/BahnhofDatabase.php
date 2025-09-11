@@ -53,7 +53,7 @@ class BahnhofDatabase extends AbstractDatabase
         $table = $this->getTable();
         $model = $this->getModel();
             if(!empty($this->pdo)){
-                $stmt = $this->pdo->prepare("SELECT * FROM `$table`");
+                $stmt = $this->pdo->prepare("SELECT * FROM `db_399097_24`.haltestelle");
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_CLASS, $model);
                 $data = $stmt->fetchAll(PDO::FETCH_CLASS);
@@ -71,7 +71,7 @@ class BahnhofDatabase extends AbstractDatabase
         $model = $this->getModel();
         $dataBhf = null;
         if(!empty($this->pdo)){
-            $stmt = $this->pdo->prepare("SELECT * FROM $table WHERE name LIKE :term; ");
+            $stmt = $this->pdo->prepare("SELECT * FROM db_399097_24.haltestelle WHERE name LIKE :term; ");
             $stmt->execute(['term' => $term.'%']);
            //$dataBhf = $stmt->setFetchMode(PDO::FETCH_CLASS);
             while($row = $stmt->fetchALL(PDO::FETCH_ASSOC)){

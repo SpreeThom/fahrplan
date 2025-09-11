@@ -30,7 +30,7 @@ class ZugDatabase extends AbstractDatabase
         $table = $this->getTable();
         $model = $this->getModel();
         if (!empty($this -> pdo)){
-            $stmt = $this -> pdo -> prepare("SELECT * FROM $table");
+            $stmt = $this -> pdo -> prepare("SELECT * FROM `db_399097_24`.$table  ");
             $stmt -> execute();
             $stmt -> setFetchMode(PDO::FETCH_CLASS, $model);
             $data = $stmt -> fetchAll(PDO::FETCH_CLASS);
@@ -58,7 +58,7 @@ class ZugDatabase extends AbstractDatabase
      * @param $lw
      * @return bool
      */
-    function insertZug($nr, $mg, $jahr, $lw):bool
+    function insertZug($nr, $mg, $jahr, $lw, $gt):bool
     {
         $b=true;
         try {
@@ -66,17 +66,19 @@ class ZugDatabase extends AbstractDatabase
               $b=false;
           }else {
               if (!empty($this->pdo)) {
-                  $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.zug (zug_nr,zug_mg,zug_jahr,zug_lw)
-                                            VALUES (:nr,:mg,:jahr,:lw)");
+                  $stmt = $this->pdo->prepare("INSERT INTO `db_399097_24`.zug (zug_nr,zug_mg,zug_jahr,zug_lw,zug_gt)
+                                            VALUES (:nr,:mg,:jahr,:lw,:gt)");
                   $stmt->execute([
                       ":nr" => $nr,
                       ":mg" => $mg,
                       ":jahr" => $jahr,
-                      ":lw" => $lw
+                      ":lw" => $lw,
+                      ":gt" => $gt
                   ]);
               }
           }
         } catch (PDOException $e) {
+
            header("Location /zug");
 
             exit();
@@ -97,14 +99,13 @@ class ZugDatabase extends AbstractDatabase
      * @param $zid
      * @return bool
      */
-    function insertIntern($jahr, $fpljahr, $gattung, $lw, $tage, $verkehrtnicht, $intern, $mitropa, $bar, $zid):bool
+    function insertIntern( $fpljahr, $gattung, $lw, $tage, $verkehrtnicht, $intern, $mitropa, $bar, $zid):bool
     {
         if (!empty($this->pdo)) {
             $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.intern
-            (i_jahr, i_fpljahr, i_gattung, i_lw, i_tage, i_verkehrtnicht,i_intern, i_mitropa, i_bar, zugId)
-               values(:jahr,:fpljahr,:gattung,:lw,:tage,:verkehrtnicht,:intern,:mitropa,:bar,:zid)");
+            ( i_fpljahr, i_gattung, i_lw, i_tage, i_verkehrtnicht,i_intern, i_mitropa, i_bar, zugId)
+               values(:fpljahr,:gattung,:lw,:tage,:verkehrtnicht,:intern,:mitropa,:bar,:zid)");
                 $stmt->execute([
-                'jahr' => $jahr,
                 'fpljahr' => $fpljahr,
                 'gattung' => $gattung,
                 'lw' => $lw,

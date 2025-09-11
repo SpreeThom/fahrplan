@@ -78,8 +78,8 @@ get_header('start');
         </div>
         <!-- Textarea -->
         <div class="col-md-6">
-            <label for="zugJahr" class="form-label">Jahr</label>
-            <input type="text" class="form-control" id="zugJahr" name="zugJahr">
+            <label for="zugGt" class="form-label">Zug-gattung</label>
+            <input type="text" class="form-control" id="zugGt" name="zugGt">
         </div>
         <div class="col-md-6">
             <label for="zugLw" class="form-label">Laufweg</label>
@@ -108,10 +108,6 @@ get_header('start');
         <!-- intern Fahrplan eintragen -->
         <div class = "col border border-dark border-start-0 border-1 m-0">
             <form class="row g-3" method="post" >
-            <div class="col-md-6">
-                <label for="internJahr" class="form-label">Intern Jahr (int)</label>
-                <input type="text" class="form-control" id="internJahr" name="internJahr">
-            </div>
             <div class="col-md-6">
                 <label for="internFpl" class="form-label">Taschenfahrplan</label>
                 <input type="text" class="form-control" id="internFpl" name="internFpl">
