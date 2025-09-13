@@ -26,7 +26,7 @@ class BahnhofDatabase extends AbstractDatabase
         return BahnhofModel::class;
     }
 
-    public function insertBahnhof($haltestelle):void
+    public function insertBahnhof($haltestelle,$nummer):void
     {
         try{
             if(!empty($this->pdo)){
@@ -38,8 +38,9 @@ class BahnhofDatabase extends AbstractDatabase
                         header("location: /bahnhof");
                         exit();
                     }else{
-                        $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.haltestelle (`name`) VALUES (:name);");
-                        $stmt -> execute(params: ['name' => $haltestelle]);
+                        $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.haltestelle (`name`,`h_nr`) VALUES (:name,:nummer);");
+                        $stmt -> execute(params: ['name' => $haltestelle,
+                                                    'nummer' => $nummer]);
                     }
             }
         }catch (PDOException $e){

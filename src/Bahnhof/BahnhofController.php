@@ -18,15 +18,24 @@ class BahnhofController extends AbstractController
     }
     public function bahnhof():void{
         //
-
         $checkL = isset($_POST['loadID']) ? 1 : 0;
         if((!empty($_POST['zugID'])) and (!empty($_POST['halteID'])))
         {
             $z_id = intval( $this->sanitizeData($_POST['zugID']));
             $h_id = intval( $this->sanitizeData($_POST['halteID']));
             $folge = intval( $this->sanitizeData($_POST['rfolge']));
-            $_ank = $this->sanitizeData($_POST['ank']);
-            $_abf = $this->sanitizeData($_POST['abf']);
+            $_ank = $_POST['ank'];
+            if($_ank == "" || (empty($_ank))){
+                $_ank = "-";
+            }else{
+                $_ank = $this->sanitizeData($_POST['ank']);
+            }
+           $_abf = $_POST['abf'];
+            if($_abf == "" || (empty($_abf))){
+                $_abf = "-";
+            }else{
+                $_abf = $this->sanitizeData($_POST['abf']);
+            }
             $this -> bahnhofDatabase ->insertFahrplan($z_id,$h_id,$folge,$_ank,$_abf);
             $this->setZugid($z_id);
 
@@ -40,7 +49,12 @@ class BahnhofController extends AbstractController
         }
         if(!empty($_POST['bhfName'])){
             $bhfName =$this ->sanitizeData($_POST['bhfName']);
-            $this -> bahnhofDatabase ->insertBahnhof($bhfName);
+            if(empty($_post['h_nummer'])){
+                $bhfNummer = 800;
+            }else{
+                $bhfNummer =$this ->sanitizeData($_POST['h_nummer']);
+            }
+            $this -> bahnhofDatabase ->insertBahnhof($bhfName,$bhfNummer);
         }
         if(!empty($_POST['bhfsearch'])){
                 $bhfsearch =$this ->sanitizeData($_POST['bhfsearch']);
@@ -54,6 +68,7 @@ class BahnhofController extends AbstractController
     }
     private function sanitizeData($data):string{
         if(empty($data)){
+            var_dump('bin hier');
             exit();
         }
         $data = trim($data);

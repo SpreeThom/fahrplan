@@ -18,7 +18,7 @@ namespace App\Core;
      {
          try {
              $this->connection = new PDO (
-                 dsn: "mysql:host={$this -> host}; dbname = $this->dbname ", username: "USER399097_plan", password: ""
+                 dsn: "mysql:host={$this -> host}; dbname = $this->dbname ", username: "USER399097_plan", password: "24th03Pfeffi?"
              );
          } catch (PDOException $e) {
              echo $e->getMessage();

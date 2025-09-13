@@ -13,5 +13,7 @@ get_header('start');
         <li> <a href="/notion">Anzeigen</a> </li>
         <li> <a href="/bahnhof">Eintrag für die Bahnhöfe</a> </li>
         <li> <a href="/strecken"> Eintrag für die Strecken</a> </li>
+        <hr>
+
     </div>
 <?php get_footer(); ?>
