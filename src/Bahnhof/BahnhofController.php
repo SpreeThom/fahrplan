@@ -6,9 +6,6 @@ use App\AbstractMVC\AbstractController;
 
 class BahnhofController extends AbstractController
 {
-    /**
-     * @var BahnhofDatabase|null
-     */
     protected $bahnhofDatabase = null;
     protected $suche ='';
     protected int $zugid=0;
@@ -19,11 +16,13 @@ class BahnhofController extends AbstractController
     public function bahnhof():void{
         //
         $checkL = isset($_POST['loadID']) ? 1 : 0;
-        if((!empty($_POST['zugID'])) and (!empty($_POST['halteID'])))
+        if((!empty($_POST['rfolge'])) and (!empty($_POST['halteID'])))
         {
             $z_id = intval( $this->sanitizeData($_POST['zugID']));
             $h_id = intval( $this->sanitizeData($_POST['halteID']));
             $folge = intval( $this->sanitizeData($_POST['rfolge']));
+            $this->setZugid($z_id);
+
             $_ank = $_POST['ank'];
             if($_ank == "" || (empty($_ank))){
                 $_ank = "-";
@@ -37,7 +36,7 @@ class BahnhofController extends AbstractController
                 $_abf = $this->sanitizeData($_POST['abf']);
             }
             $this -> bahnhofDatabase ->insertFahrplan($z_id,$h_id,$folge,$_ank,$_abf);
-            $this->setZugid($z_id);
+
 
         }elseif((!empty($_POST['theID'])) and ($checkL) ){
             $this->setZugid($_POST['theID']);
@@ -68,7 +67,6 @@ class BahnhofController extends AbstractController
     }
     private function sanitizeData($data):string{
         if(empty($data)){
-            var_dump('bin hier');
             exit();
         }
         $data = trim($data);
@@ -79,5 +77,11 @@ class BahnhofController extends AbstractController
     protected function setZugid(int $zugid): void
     {
         $this->zugid = $zugid;
+    }
+    protected function getZugid(): int{
+        if (empty($this->zugid)) {
+            $this->zugid = 0;
+        }
+        return $this->zugid;
     }
 }

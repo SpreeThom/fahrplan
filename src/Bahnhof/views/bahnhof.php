@@ -128,7 +128,7 @@
 
         </div>
         <div class="col-4 border border-dark border-1 bg-warning">
-            <div style="max-height: 200px; overflow-y:auto;" >
+            <div style="max-height: 500px; overflow-y:auto;" >
                 <table  class="table table-bordered table-striped  mb-2">
                     <thead>
                         <tr class="text-center" style="font-size:.9em;">
