@@ -18,13 +18,18 @@
                     <label for = "sbis" class="form-label">Strecke in der Oberlausitz</label>
                     <input type="text" class="form-control" id="sbis" name="sbis" placeholder="Strecke in Ol">
                 </div>
+                <div class="col-md-2">
+                    <label for="skm" class="form-label">gesammt Kilometer</label>
+                    <input type="text" class="form-control" id="skm" name="skm"></input>
+                    <label for="olkm" class="form-label">Km in der Oberlausitz</label>
+                    <input type="text" class="form-control" id="olkm" name="olkm"></input>
+                </div>
                 <div class="col-md-4">
                     <label for = "spic" class="form-label">Bild in der Oberlausitz</label>
                     <input type="text" class="form-control" id="spic" name="spic" placeholder="Pfad">
 
-
-                    <label for = "picol" class="form-label">Ersatz für das Bild</label>
-                    <input type="text" class="form-control" id="sname" name="sname" placeholder="Pfad">
+                    <label for = "spicol" class="form-label">Ersatz für das Bild</label>
+                    <input type="text" class="form-control" id="spicol" name="spicol" placeholder="Pfad">
                 </div>
                 <div class ="col-md-8">
                     <div class="form-floating">
@@ -52,6 +57,7 @@
         </div>
     </div>
 </div>
+<?php get_footer(); ?>
 
 
 

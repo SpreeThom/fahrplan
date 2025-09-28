@@ -57,7 +57,6 @@ class ZugController extends AbstractController
                 $zLaufweg = $this->sanitizeData($_POST['zugLw']);
                 $zGattung = $this->sanitizeData($_POST['zugGt']);
                 $err=$this->zugDatabase->insertZug($zNummer,$zMitgattung, $zJahr,$zLaufweg,$zGattung);
-            var_dump($err);
                 if(!$err){
 
                     $this->setError("Datenbank-Fehler!");
