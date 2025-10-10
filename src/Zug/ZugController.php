@@ -78,6 +78,9 @@ class ZugController extends AbstractController
         $nicht = $this->sanitizeData($_POST['internNicht']);
         $mitropa = $checkM;
         $bar = $checkB;
+        if((empty($nicht)) || (empty($nicht)=="")) {
+            $nicht = "--";
+        }
         $_id = $this->sanitizeData($_POST['idZug']);
         $this->zugDatabase->insertIntern($fpl,$gat,$lw,$tage,$nicht,$text,$mitropa,$bar,$_id);
      }
@@ -91,9 +94,9 @@ class ZugController extends AbstractController
             }
          $zNummer = $this->sanitizeData($_POST['zugNr']);
          $zMitgattung = $this->sanitizeData($_POST['zugMg']);
-         $zJahr = $this->sanitizeData($_POST['zugJahr']);
+        // $zJahr = $this->sanitizeData($_POST['zugJahr']);
          $zLaufweg = $this->sanitizeData($_POST['zugLw']);
-            $this->zugDatabase->setUpdateZug($zNummer,$zMitgattung,$zJahr,$zLaufweg,$_sId);
+            $this->zugDatabase->setUpdateZug($zNummer,$zMitgattung,$zLaufweg,$_sId);
      }
     protected function setError(?string $error): void
     {

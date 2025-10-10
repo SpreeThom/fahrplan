@@ -156,9 +156,9 @@ get_header('start');
                 </form>
         </div>
     </div>
+    <li>
+     <a href="/fahrplan">Zurück</a>
+    </li>
 </div>
-<?php if(!empty($error)){
-    var_dump($error);
-} ?>
 
 <?php get_footer(); ?>

@@ -7,6 +7,8 @@ namespace App;
  use App\Core\DBinit;
  use App\Home\HomeController;
  use App\Home\HomeDatabase;
+ use App\Station\StationsController;
+ use App\Station\StationsDatabase;
  use App\Strecke\StreckenController;
  use App\Strecke\StreckenDatabase;
  use App\Track\TrackController;
@@ -48,6 +50,12 @@ namespace App;
             },
             "streckenDatabase"=> function(){
             return new StreckenDatabase($this -> build('pdo'));
+            },
+            "stationsController"=> function(){
+            return new StationsController($this -> build('stationsDatabase'));
+            },
+            "stationsDatabase"=> function(){
+            return new StationsDatabase($this -> build('pdo'));
             },
             'router' => function(){
                 return new Router($this->build("container"));

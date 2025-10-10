@@ -101,21 +101,26 @@ class ZugDatabase extends AbstractDatabase
      */
     function insertIntern( $fpljahr, $gattung, $lw, $tage, $verkehrtnicht, $intern, $mitropa, $bar, $zid):bool
     {
-        if (!empty($this->pdo)) {
-            $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.intern
+        try {
+            if (!empty($this->pdo)) {
+                $stmt = $this->pdo->prepare("INSERT INTO db_399097_24.intern
             ( i_fpljahr, i_gattung, i_lw, i_tage, i_verkehrtnicht,i_intern, i_mitropa, i_bar, zugId)
                values(:fpljahr,:gattung,:lw,:tage,:verkehrtnicht,:intern,:mitropa,:bar,:zid)");
                 $stmt->execute([
-                'fpljahr' => $fpljahr,
-                'gattung' => $gattung,
-                'lw' => $lw,
-                'tage' => $tage,
-                'verkehrtnicht' => $verkehrtnicht,
-                'intern' => $intern,
-                'mitropa' => $mitropa,
-                'bar' => $bar,
-                'zid' => $zid
-            ]);
+                    'fpljahr' => $fpljahr,
+                    'gattung' => $gattung,
+                    'lw' => $lw,
+                    'tage' => $tage,
+                    'verkehrtnicht' => $verkehrtnicht,
+                    'intern' => $intern,
+                    'mitropa' => $mitropa,
+                    'bar' => $bar,
+                    'zid' => $zid
+                ]);
+            }
+        }catch (PDOException $e) {
+            var_dump($e->getMessage());
+            die();
         }
         return true;
     }
@@ -128,13 +133,13 @@ class ZugDatabase extends AbstractDatabase
      * @param $upid
      * @return bool
      */
-    function setUpdateZug($znr, $mg, $jahr, $lw, $upid):bool
+    function setUpdateZug($znr, $mg, $lw, $upid):bool
     {
         if (!empty($this->pdo)) {
             $znr = intval($znr);
-            $jahr = intval($jahr);
+
             $upid = intval($upid);
-            $stmt = $this->pdo->prepare(/** @lang text */ "UPDATE db_399097_24.zug SET zug_nr ='$znr',zug_mg ='$mg',zug_jahr ='$jahr',zug_lw ='$lw'
+            $stmt = $this->pdo->prepare(/** @lang text */ "UPDATE db_399097_24.zug SET zug_nr ='$znr',zug_mg ='$mg',zug_lw ='$lw'
                                             WHERE zug_id = '$upid' ");
             $stmt->execute();
         }

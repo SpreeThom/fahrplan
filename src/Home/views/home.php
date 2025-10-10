@@ -14,6 +14,7 @@ get_header('start');
         <li> <a href="/bahnhof">Eintrag für die Bahnhöfe</a> </li>
         <li> <a href="/timetable"> Eintrag für den Fahrplan</a> </li>
         <li> <a href="/strecke">Eintrag Streckendaten</a> </li>
+        <li> <a href="/station">Eintrag für die D- Zug Haltestellen</a> </li>
         <hr>
 
     </div>

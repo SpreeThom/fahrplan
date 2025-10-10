@@ -22,3 +22,6 @@ elseif ($request == "/bahnhof"){
 elseif ($request == "/strecke"){
     $router -> add("streckenController","strecke");
 }
+elseif ($request == "/station"){
+    $router -> add("stationsController","station");
+}
