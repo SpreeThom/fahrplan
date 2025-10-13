@@ -22,8 +22,8 @@ get_header('start');
                     <input type="text" class="form-control" id="idStat" name="idStat"/>
                 </div>
                 <div class="col-md-4">
-                    <label for="folge" class="form-label">Reihenfolge</label>
-                    <input type="text" class="form-control" id="folge" name="folge"/>
+                    <label for="sfolge" class="form-label">Reihenfolge</label>
+                    <input type="text" class="form-control" id="sfolge" name="sfolge"/>
                 </div>
                 <div class="col-md-4">
                     <label for="ank" class="form-label">Ankunft</label>
@@ -60,9 +60,9 @@ get_header('start');
                                     foreach($timetable as $key){
                                         echo "<tr style='font-size:.75em;'>";
                                         echo "<td>" . $key['id'] . "</td>";
-                                        echo "<td >" .$key['bahnhof'] ."</td>";
-                                        echo "<td>" .$key['Ankunft']."</td>";
-                                        echo "<td>" .$key['Abfahrt'] ."</td>";
+                                        echo "<td >" .$key['station'] ."</td>";
+                                        echo "<td>" .$key['ankunft']."</td>";
+                                        echo "<td>" .$key['abfahrt'] ."</td>";
                                         echo "<td>" .$key['reihe'] ."</td>";
                                         echo "</tr>";
                                     }
