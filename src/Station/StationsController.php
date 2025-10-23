@@ -6,6 +6,7 @@ use App\AbstractMVC\AbstractController;
 
 class StationsController extends AbstractController
 {
+    public mixed $suche = null;
     protected $stationsDataBase=null;
     protected int $zugID=0;
     public function __construct(StationsDatabase $stationDataBase)
@@ -14,7 +15,14 @@ class StationsController extends AbstractController
     }
 
     public function station():void{
-
+        if(!empty($_POST['statSearch'])){
+            $StatSearch = $this->sanitizeData($_POST['statSearch']);
+            $this->suche = $this->stationsDataBase->searchHaltestelle($StatSearch);
+        }
+        if(!empty($_POST['statName'])){
+            $stationName = $this->sanitizeData($_POST['statName']);
+            $this -> stationsDataBase -> setHaltestelle($stationName);
+        }
         if((!empty($_POST['idZug'])) and (!empty($_POST['idStat']))) {
             $idZug = intval($this ->sanitizeData($_POST['idZug']));
             $idStat = intval($this ->sanitizeData($_POST['idStat']));
@@ -37,7 +45,7 @@ class StationsController extends AbstractController
 
         }
         $timetable =  $this ->stationsDataBase->getTimeTable($this->getZugID());
-        $this->pageLoad("Station",'station',['timetable'=>$timetable]);
+        $this->pageLoad("Station",'station',['timetable'=>$timetable,'suche'=>$this->suche]);
     }
 
     private function sanitizeData($data):string{

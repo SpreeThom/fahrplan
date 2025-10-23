@@ -50,9 +50,42 @@ class StationsDatabase extends AbstractDatabase
               $data = $stmt ->fetchAll();
           }
       }catch(PDOException $e){
-
           exit();
       }
       return $data;
   }
+  public function setHaltestelle($halte):void{
+      try {
+          if(!empty($this->pdo)){
+              $id_check = $this->pdo ->prepare( "SELECT `name` FROM db_399097_24.station WHERE `name` = :halte;");
+              $id_check -> execute(["halte" => $halte]);
+              $check = $id_check -> fetch(pdo::FETCH_ASSOC);
+              if(isset($check['name'])){
+                  header("Location: /station");
+              }else{
+                  $stmt = $this -> pdo -> prepare("INSERT INTO db_399097_24.station(`name`) VALUES(:halte) ");
+                  $stmt -> execute(["halte" => $halte]);
+              }
+
+          }
+      }catch (PDOException $e){
+          //
+      }
+  }
+    public function searchHaltestelle($_halte):null|array{
+        $data = null;
+        try {
+            if(!empty($this->pdo)){
+                $stmt = $this -> pdo -> prepare("SELECT * FROM db_399097_24.station WHERE `name` LIKE :halte;");
+                $stmt -> execute(["halte" => $_halte.'%']);
+                while($row = $stmt -> fetchAll(pdo::FETCH_ASSOC)){
+                    $data = $row;
+                }
+            }
+        }catch (PDOException $e){
+            exit();
+        }
+        return $data;
+    }
+
 }
