@@ -18,20 +18,19 @@ class StreckenDatabase extends AbstractDatabase
     {
         // TODO: Implement getModel() method.
     }
-    public function eintragen($name,$bis,$pic,$picOl,$notiz,$km,$ol):bool{
+    public function eintragen($name,$bis,$pic,$notiz,$km,$ol):bool{
         $b = true;
         try {
              if($this->equalStrecke($name,$bis)){
                  $b=false;
              } else{
                  if (!empty($this->pdo)){
-                     $stmt = $this -> pdo -> prepare("INSERT INTO `db_399097_24`.strecke(name, str_kb, str_pic, str_olpic, str_no,str_km,str_kmol)
-                                                             VALUES (:name, :kb, :pic, :olpic, :notiz, :km, :olmo)");
+                     $stmt = $this -> pdo -> prepare("INSERT INTO `db_399097_24`.strecke(name, str_kb, str_pic, str_no,str_km,str_kmol)
+                                                             VALUES (:name, :kb, :pic, :notiz, :km, :olmo)");
                      $stmt -> execute(params: [
                          ":name" => $name,
                          ":kb" => $bis,
                          ":pic" => $pic,
-                         ":olpic" => $picOl,
                          ":notiz" => $notiz,
                          ":km" => $km,
                          ":olmo" => $ol
@@ -43,11 +42,11 @@ class StreckenDatabase extends AbstractDatabase
         }
         return $b;
     }
-    public function update($_id, $name, $bis, $pic, $olpic,$sNotiz,$km,$ol):bool{
+    public function update($_id, $name, $bis, $pic,$sNotiz,$km,$ol):bool{
         try {
           if(!empty($this->pdo)){
              $stmt= $this -> pdo->prepare("UPDATE `db_399097_24`.strecke set name='$name',str_kb='$bis',
-                                                   str_pic='$pic',str_olpic='$olpic',str_no='$sNotiz',str_km='$km',str_kmol='$ol'  WHERE str_id='$_id'");
+                                                   str_pic='$pic',str_no='$sNotiz',str_km='$km',str_kmol='$ol'  WHERE str_id='$_id'");
              $stmt -> execute();
           }
         }catch(PDOException $e){
@@ -72,5 +71,18 @@ class StreckenDatabase extends AbstractDatabase
             return false;
         }
             return $b;
+    }
+    public function readStrecke():null|array{
+        $data = null;
+        try{
+          if(!empty($this->pdo)){
+              $stmt = $this -> pdo -> prepare("SELECT * FROM `db_399097_24`.strecke");
+              $stmt -> execute();
+              $data = $stmt -> fetchAll(PDO::FETCH_CLASS);
+          }
+        }catch (PDOException $e){
+            $data=1;
+        }
+        return $data;
     }
 }

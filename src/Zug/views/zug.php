@@ -21,6 +21,7 @@ get_header('start');
                     <th>Jahr</th>
                     <th> Laufweg/über </th>
                 </tr>
+                </thead>
                 <?php
                  foreach ($zug as $item) {
                      echo "<tr class = 'text-center'>";
@@ -31,7 +32,7 @@ get_header('start');
                     echo "</tr>";
                     }
                 ?>
-                </thead>
+
             </table>
         </div>
         </div>

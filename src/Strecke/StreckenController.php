@@ -19,29 +19,27 @@ class StreckenController extends AbstractController
             $this -> streckeEintragen();
         }
 
-
-        $this ->pageLoad("Strecke", "strecke",['notiz' => null]);
+        $streckedetail = $this->streckendatabase -> readStrecke();
+        $this ->pageLoad("Strecke", "strecke",['notiz' => null,'streckedetail' => $streckedetail]);
     }
      function streckeEintragen(): void{
         $sname = $this -> sanitizeData($_POST["sname"]);
         $sbis = $this -> sanitizeData($_POST["sbis"]);
         $spic = $this -> sanitizeData($_POST["spic"]);
-        $spicol = $this -> sanitizeData($_POST["spicol"]);
         $snotiz = $this -> sanitizeData($_POST["snotiz"]);
         $skm = $this -> sanitizeData($_POST["skm"]);
         $olkm = $this -> sanitizeData($_POST["olkm"]);
-        $this -> streckendatabase -> eintragen($sname,$sbis,$spic,$spicol,$snotiz,$skm,$olkm);
+        $this -> streckendatabase -> eintragen($sname,$sbis,$spic,$snotiz,$skm,$olkm);
     }
     function UpdateStrecke():void{
         $s_id = intval($_POST['sID']);
         $sname = $this -> sanitizeData($_POST["sname"]);
         $sbis = $this -> sanitizeData($_POST["sbis"]);
         $spic = $this -> sanitizeData($_POST["spic"]);
-        $spicol = $this -> sanitizeData($_POST["spicol"]);
         $snotiz = $this -> sanitizeData($_POST["snotiz"]);
         $skm = $this -> sanitizeData($_POST["skm"]);
         $olkm = $this -> sanitizeData($_POST["olkm"]);
-        $this -> streckendatabase->update($s_id,$sname,$sbis,$spic,$spicol,$snotiz,$skm,$olkm);
+        $this -> streckendatabase->update($s_id,$sname,$sbis,$spic,$snotiz,$skm,$olkm);
     }
     private function sanitizeData($data):string{
         if(empty($data)){

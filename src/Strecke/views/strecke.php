@@ -4,6 +4,7 @@
  * thomas hempel 2025
  */
  get_header('start');
+ /** @var TYPE_NAME $streckedetail */
  ?>
 <div class="container">
     <h3 class = "text-center bg-secondary-subtle text-black"><u>Erfassung der Strecken Daten!</u></h3>
@@ -19,17 +20,14 @@
                     <input type="text" class="form-control" id="sbis" name="sbis" placeholder="Strecke in Ol">
                 </div>
                 <div class="col-md-2">
-                    <label for="skm" class="form-label">gesammt Kilometer</label>
-                    <input type="text" class="form-control" id="skm" name="skm"></input>
+                    <label for="skm" class="form-label">Länge/Kilometer</label>
+                    <input type="text" class="form-control" id="skm" name="skm">
                     <label for="olkm" class="form-label">Km in der Oberlausitz</label>
-                    <input type="text" class="form-control" id="olkm" name="olkm"></input>
+                    <input type="text" class="form-control" id="olkm" name="olkm">
                 </div>
                 <div class="col-md-4">
                     <label for = "spic" class="form-label">Bild in der Oberlausitz</label>
                     <input type="text" class="form-control" id="spic" name="spic" placeholder="Pfad">
-
-                    <label for = "spicol" class="form-label">Ersatz für das Bild</label>
-                    <input type="text" class="form-control" id="spicol" name="spicol" placeholder="Pfad">
                 </div>
                 <div class ="col-md-8">
                     <div class="form-floating">
@@ -56,6 +54,35 @@
             </form>
         </div>
     </div>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Strecke - Ol</td>
+                <td>Notiz/Bemerkung</td>
+            </tr>
+        </thead>
+        <tbody class ="text-start">
+        <?php
+            foreach ($streckedetail as $item) {
+                echo "<tr>";
+                echo "<td>".$item->str_id."</td>";
+                echo "<td>".$item->name."</td>";
+                echo "<td>".$item->str_kb."</td>";
+                echo "<td>".$item->str_no."</td>";
+            }
+        ?>
+        </tbody>
+    </table>
+    <hr>
+        <?php
+            foreach ($streckedetail as $item) {
+                echo "<p> id = ".$item->str_id.",| KM= ".$item->str_km.", OL= ".$item->str_kmol." </p>";
+                echo "- - - <br>";
+            }
+        ?>
 </div>
 <?php get_footer(); ?>
 
