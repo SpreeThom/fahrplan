@@ -31,14 +31,7 @@ get_header('start');
                     <label for="sfolge" class="form-label">Reihenfolge</label>
                     <input type="text" class="form-control" id="sfolge" name="sfolge"/>
                 </div>
-                <div class="col-md-4">
-                    <label for="ank" class="form-label">Ankunft</label>
-                    <input type="time" class="form-control" id="ank" name="ank" placeholder="0"/>
-                </div>
-                <div class="col-md-4">
-                    <label for="abf" class="form-label">Abfahrt</label>
-                    <input type="time" class="form-control" id="abf" name="abf" placeholder="0"/>
-                </div>
+
                 <div class="col-12 pb-md-3">
                     <button type="submit" class="btn btn-outline-success">Eintragen/Update</button>
                 </div>

@@ -25,3 +25,6 @@ elseif ($request == "/strecke"){
 elseif ($request == "/station"){
     $router -> add("stationsController","station");
 }
+elseif ($request == "/pzug"){
+    $router -> add("pzugController","pzug");
+}
