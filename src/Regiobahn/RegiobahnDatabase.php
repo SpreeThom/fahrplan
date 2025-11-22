@@ -16,4 +16,7 @@ class RegiobahnDatabase extends AbstractDatabase
     {
         // TODO: Implement getModel() method.
     }
+    public function insertStrecke(int $pzNr,$pzMg,$pzLw,$pzGt,$pzBis,$pzUe,int $strId){
+
+    }
 }

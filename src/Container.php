@@ -9,6 +9,8 @@ namespace App;
  use App\Home\HomeDatabase;
  use App\Pzug\PzugController;
  use App\Pzug\PzugDatabase;
+ use App\Regiobahn\RegiobahnController;
+ use App\Regiobahn\RegiobahnDatabase;
  use App\Station\StationsController;
  use App\Station\StationsDatabase;
  use App\Strecke\StreckenController;
@@ -64,6 +66,12 @@ namespace App;
             },
             "pzugDatabase"=> function(){
             return new PzugDatabase($this -> build('pdo'));
+            },
+            "regiobahnController"=> function(){
+              return new RegiobahnController($this -> build('regiobahnDatabase'));
+            },
+            "regiobahnDatabase"=> function(){
+            return new RegiobahnDatabase($this -> build('pdo'));
             },
             'router' => function(){
                 return new Router($this->build("container"));
