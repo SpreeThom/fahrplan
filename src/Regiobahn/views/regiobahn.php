@@ -40,6 +40,10 @@ get_header('start');
                 <label for="pzBis" class="form-label">Vehrkehrs-Tage</label>
                 <input type="text" class="form-control" id="pzBis" name="pzBis"/>
             </div>
+            <div class="col-md-12">
+                <label for = "pzZus" class="form-label">Bemerkung</label>
+                <input type="text" class="form-control" id="pzZus" name="pzZus"/>
+            </div>
             <div class="col-md-2">
                 <label for="strID" class="form-label">Strecken-ID</label>
                 <input type="text" class="form-control" id="strID" name="strID"/>

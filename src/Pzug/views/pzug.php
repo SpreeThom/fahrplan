@@ -49,8 +49,8 @@ get_header('start');
             <div class="col-md-6">
                 <form class="row g-1" method="post">
                     <div class="col">
-                        <label for="bhfName" class="form-label">Bahnhof</label>
-                        <input type="text" class="form-control" id="bhfName" name="bhfName"/>
+                        <label for="bhfOrt" class="form-label">Bahnhof</label>
+                        <input type="text" class="form-control" id="bhfOrt" name="bhfOrt"/>
                     </div>
                     <div class="col-12 pb-md-3">
                         <button type="submit" class="btn btn-outline-primary">Bhf-eintragen</button>
