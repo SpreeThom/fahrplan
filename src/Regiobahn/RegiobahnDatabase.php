@@ -28,6 +28,8 @@ class RegiobahnDatabase extends AbstractDatabase
      * @param $pzUe
      * @param $pzZus
      * @param int $strId
+     * @param $pzAn
+     * @param $pzZiel
      * @return void
      */
     public function insertStrecke(int $pzNr, $pzMg, $pzLw, $pzGt, $pzBis, $pzUe, $pzZus,int $strId,$pzZiel,$pzAn): void

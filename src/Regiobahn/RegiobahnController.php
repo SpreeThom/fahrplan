@@ -27,7 +27,7 @@ class RegiobahnController extends AbstractController
             }else{
                 $pzZus = $this -> sanitizeData($_POST['pzZus']);
             }
-            $this -> regiobahnDatabase -> insertStrecke($pzNr,$pzMg,$pzLw,$pzGt,$pzBis,$pzUe,$pzZus,$strID,$pzZiel,$spAn);
+            $this -> regiobahnDatabase -> insertStrecke($pzNr,$pzMg,$pzLw,$pzGt,$pzBis,$pzUe,$pzZus,$strID,$pzZiel,$pzAn);
         }
         $this -> pageLoad('Regiobahn',"regiobahn",[]);
     }
