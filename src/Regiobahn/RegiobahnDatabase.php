@@ -30,12 +30,12 @@ class RegiobahnDatabase extends AbstractDatabase
      * @param int $strId
      * @return void
      */
-    public function insertStrecke(int $pzNr, $pzMg, $pzLw, $pzGt, $pzBis, $pzUe, $pzZus, int $strId): void
+    public function insertStrecke(int $pzNr, $pzMg, $pzLw, $pzGt, $pzBis, $pzUe, $pzZus,int $strId,$pzZiel,$pzAn): void
     {
         try{
           if(!empty($this -> pdo)){
-              $stmt = $this -> pdo -> prepare ("INSERT INTO db_399097_24.pzug( p_nr, p_mg, p_lw, p_gt, p_bis, p_ue, p_zus, str_id)
-                                                        VALUES(:p_nr,:p_mg,:p_lw,:p_gt,:p_bis,:p_ue,:p_zus,:str_id)");
+              $stmt = $this -> pdo -> prepare ("INSERT INTO db_399097_24.pzug( p_nr, p_mg, p_lw, p_gt, p_bis, p_ue, p_zus, str_id,p_ziel,p_an)
+                                                        VALUES(:p_nr,:p_mg,:p_lw,:p_gt,:p_bis,:p_ue,:p_zus,:str_id,:p_ziel,:p_an)");
               $stmt -> execute([
                   ":p_nr"=>$pzNr,
                   ":p_mg"=>$pzMg,
@@ -44,7 +44,9 @@ class RegiobahnDatabase extends AbstractDatabase
                   ":p_bis"=>$pzBis,
                   ":p_ue"=>$pzUe,
                   ":p_zus"=>$pzZus,
-                  ":str_id"=>$strId
+                  ":str_id"=>$strId,
+                  ":p_ziel"=>$pzZiel,
+                  ":p_an"=>$pzAn
               ]);
           }
         }catch (PDOException $e){

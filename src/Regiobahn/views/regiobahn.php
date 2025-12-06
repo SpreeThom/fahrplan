@@ -44,6 +44,14 @@ get_header('start');
                 <label for = "pzZus" class="form-label">Bemerkung</label>
                 <input type="text" class="form-control" id="pzZus" name="pzZus"/>
             </div>
+            <div class="col-md-6">
+                <label for = "pzZiel" class="form-label">End-Bahnhof (Ziel)</label>
+                <input type="text" class="form-control" id="pzZiel" name="pzZiel"/>
+            </div>
+            <div class = "col-md-4">
+                <label for="pzAn" class="form-label">Ankunft</label>
+                <input type="text" class="form-control" id="pzAn" name="pzAn" placeholder="Uhr"/>
+            </div>
             <div class="col-md-2">
                 <label for="strID" class="form-label">Strecken-ID</label>
                 <input type="text" class="form-control" id="strID" name="strID"/>

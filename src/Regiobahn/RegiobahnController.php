@@ -18,6 +18,8 @@ class RegiobahnController extends AbstractController
             $pzGt = $this -> sanitizeData($_POST['pzGt']);
             $pzUe = $this -> sanitizeData($_POST['pzUe']);
             $pzBis = $this -> sanitizeData($_POST['pzBis']);
+            $pzZiel = $this -> sanitizeData($_POST['pzZiel']);
+            $pzAn = $this -> sanitizeData($_POST['pzAn']);
             $strID = intval($this -> sanitizeData($_POST['strID']));
             if((empty($_POST['pzZus'])) or ($_POST['pzZus'])==""){
 
@@ -25,7 +27,7 @@ class RegiobahnController extends AbstractController
             }else{
                 $pzZus = $this -> sanitizeData($_POST['pzZus']);
             }
-            $this -> regiobahnDatabase -> insertStrecke($pzNr,$pzMg,$pzLw,$pzGt,$pzBis,$pzUe,$pzZus,$strID);
+            $this -> regiobahnDatabase -> insertStrecke($pzNr,$pzMg,$pzLw,$pzGt,$pzBis,$pzUe,$pzZus,$strID,$pzZiel,$spAn);
         }
         $this -> pageLoad('Regiobahn',"regiobahn",[]);
     }
